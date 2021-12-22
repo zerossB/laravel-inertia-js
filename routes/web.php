@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/')->uses('HomeController')->name('site.home');
+Route::get('/about')->uses('AboutController')->name('site.about');
+
+Route::prefix('auth')->namespace('Auth')->group(function () {
+    Route::get('/register')->name('auth.register.index')->uses('RegisterController');
+    Route::post('/register')->name('auth.register.post')->uses('RegisterStoreController');
 });
